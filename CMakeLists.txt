@@ -35,7 +35,9 @@ target_include_directories(json
 	PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-find_package(unittest REQUIRED)
+if (EXISTS libraries/unittest/CMakeLists.txt)
+	add_subdirectory(libraries/unittest)
+endif()
 
 add_library(json_tests ${SRC_TEST})
 
