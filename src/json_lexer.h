@@ -1,5 +1,5 @@
 /*
-Copyright © Nico Zink
+Copyright ï¿½ Nico Zink
 All rights reserved.
 */
 
@@ -40,11 +40,11 @@ private:
 
 private:
 
-	int current_char;
+	int m_current_char;
 	
-	JSON_Token current_token;
+	JSON_Token m_current_token;
 
-	std::string current_string;
+	std::string m_current_string;
 	
-	std::istream& input;
+	std::istream& m_input;
 };

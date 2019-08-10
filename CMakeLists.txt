@@ -35,6 +35,8 @@ target_include_directories(json
 	PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+target_compile_features(json PRIVATE cxx_std_17)
+
 if (EXISTS libraries/unittest/CMakeLists.txt)
 	add_subdirectory(libraries/unittest)
 endif()
