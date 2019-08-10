@@ -26,7 +26,7 @@ foreach(_source IN ITEMS ${SRC_MAIN} ${SRC_TEST})
 	source_group("${_group_path}" FILES "${_source}")
 endforeach()
 
-add_library(json ${SRC_MAIN})
+create_library(json library ${SRC_MAIN})
 
 target_include_directories(json
 	PUBLIC
@@ -41,11 +41,11 @@ if (EXISTS libraries/unittest/CMakeLists.txt)
 	add_subdirectory(libraries/unittest)
 endif()
 
-add_library(json_tests ${SRC_TEST})
+create_library(json_tests tests ${SRC_TEST})
 
 target_link_libraries(json_tests json unittest)
 
-add_executable(json_test ${SRC_TEST})
+create_executable(json_test test ${SRC_TEST})
 
 target_link_libraries(json_test json unittest)
 
