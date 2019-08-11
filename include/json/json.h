@@ -71,7 +71,7 @@ public:
 
 	void set(int integer);
 
-	int size();
+	size_t size();
 
 	JSON_Value& operator[](int i);
 

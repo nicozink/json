@@ -4,6 +4,8 @@ PROJECT(json_tests VERSION 1.0.0)
 
 enable_testing()
 
+find_package(Boost REQUIRED COMPONENTS system)
+
 set(SRC_MAIN
 	${CMAKE_CURRENT_SOURCE_DIR}/include/json/json.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/json.cpp
@@ -34,6 +36,8 @@ target_include_directories(json
 	$<INSTALL_INTERFACE:include>
 	PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+target_link_libraries(json PRIVATE Boost::system)
 
 target_compile_features(json PRIVATE cxx_std_17)
 

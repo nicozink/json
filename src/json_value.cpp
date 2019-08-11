@@ -13,6 +13,7 @@ All rights reserved.
 JSON_Value::JSON_Value()
 {
 	type = JSON_Type::Null;
+	values.boolean = false;
 }
 
 JSON_Value::JSON_Value(std::string string)
@@ -221,7 +222,7 @@ void JSON_Value::set(int integer)
 	values.number = integer;
 }
 
-int JSON_Value::size()
+size_t JSON_Value::size()
 {
 	if (is_array())
 	{

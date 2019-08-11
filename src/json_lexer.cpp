@@ -182,7 +182,7 @@ void JSON_Lexer::read_string()
 
 void JSON_Lexer::skip_char()
 {
-	m_current_char = m_input.get();
+	m_input.get(m_current_char);
 	
 	if (m_input.eof())
 	{

@@ -40,7 +40,7 @@ private:
 
 private:
 
-	int m_current_char;
+	char m_current_char;
 	
 	JSON_Token m_current_token;
 
