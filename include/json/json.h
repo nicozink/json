@@ -27,7 +27,7 @@ public:
 
 	JSON_Value(bool boolean);
 
-	JSON_Value(double number);
+	JSON_Value(float number);
 
 	JSON_Value(int integer);
 
@@ -35,7 +35,7 @@ public:
 
 	JSON_Value& operator=(bool boolean);
 
-	JSON_Value& operator=(double number);
+	JSON_Value& operator=(float number);
 
 	JSON_Value& operator=(int integer);
 
@@ -67,13 +67,13 @@ public:
 
 	void set(bool boolean);
 
-	void set(double number);
+	void set(float number);
 
 	void set(int integer);
 
 	size_t size();
 
-	JSON_Value& operator[](int i);
+	JSON_Value& operator[](size_t i);
 
 	JSON_Value& operator[](std::string i);
 
@@ -99,7 +99,7 @@ private:
 
 		bool boolean;
 
-		double number;
+		float number;
 	} values;
 };
 
@@ -110,7 +110,7 @@ template <>
 bool JSON_Value::get<bool>();
 
 template <>
-double JSON_Value::get<double>();
+float JSON_Value::get<float>();
 
 template <>
 int JSON_Value::get<int>();
@@ -122,7 +122,7 @@ template <>
 bool JSON_Value::contains<bool>();
 
 template <>
-bool JSON_Value::contains<double>();
+bool JSON_Value::contains<float>();
 
 template <>
 bool JSON_Value::contains<int>();

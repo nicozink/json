@@ -64,7 +64,7 @@ TEST(Parse, TestDouble)
 {
 	auto json = JSON::Parse(" 2.5 ");
 
-	ASSERT(json.contains<double>() && json.get<double>() == 2.5);
+	ASSERT(json.contains<float>() && json.get<float>() == 2.5f);
 }
 
 TEST(Parse, TestEmptyArray)

@@ -28,7 +28,7 @@ JSON_Value::JSON_Value(bool boolean)
 	values.boolean = boolean;
 }
 
-JSON_Value::JSON_Value(double number)
+JSON_Value::JSON_Value(float number)
 {
 	type = JSON_Type::Number;
 	values.number = number;
@@ -37,7 +37,7 @@ JSON_Value::JSON_Value(double number)
 JSON_Value::JSON_Value(int integer)
 {
 	type = JSON_Type::Number;
-	values.number = integer;
+	values.number = (float)integer;
 }
 
 JSON_Value& JSON_Value::operator=(std::string string)
@@ -54,7 +54,7 @@ JSON_Value&  JSON_Value::operator=(bool boolean)
 	return *this;
 }
 
-JSON_Value&  JSON_Value::operator=(double number)
+JSON_Value&  JSON_Value::operator=(float number)
 {
 	set(number);
 
@@ -99,7 +99,7 @@ bool JSON_Value::contains<bool>()
 }
 
 template <>
-bool JSON_Value::contains<double>()
+bool JSON_Value::contains<float>()
 {
 	return (type == JSON_Type::Number);
 }
@@ -139,7 +139,7 @@ bool JSON_Value::get<bool>()
 }
 
 template <>
-double JSON_Value::get<double>()
+float JSON_Value::get<float>()
 {
 	return values.number;
 }
@@ -206,7 +206,7 @@ void JSON_Value::set(bool boolean)
 	values.boolean = boolean;
 }
 
-void JSON_Value::set(double number)
+void JSON_Value::set(float number)
 {
 	clear();
 
@@ -219,7 +219,7 @@ void JSON_Value::set(int integer)
 	clear();
 
 	type = JSON_Type::Number;
-	values.number = integer;
+	values.number = (float)integer;
 }
 
 size_t JSON_Value::size()
@@ -242,7 +242,7 @@ size_t JSON_Value::size()
 	}
 }
 
-JSON_Value& JSON_Value::operator[](int i)
+JSON_Value& JSON_Value::operator[](size_t i)
 {
 	return (*values.array)[i];
 }

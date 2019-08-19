@@ -19,9 +19,9 @@ JSON_Token JSON_Lexer::get_current_token()
 	return m_current_token;
 }
 
-double JSON_Lexer::get_number()
+float JSON_Lexer::get_number()
 {
-	return stod(m_current_string);
+	return stof(m_current_string);
 }
 
 std::string JSON_Lexer::get_string()

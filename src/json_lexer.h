@@ -20,7 +20,7 @@ public:
 
 	JSON_Token get_current_token();
 
-	double get_number();
+	float get_number();
 
 	std::string get_string();
 
