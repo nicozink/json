@@ -1,0 +1,35 @@
+name: Builds
+
+on: [push]
+
+jobs:
+  build_job:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        type: [native, emscripten]
+        exclude:
+        - os: windows-latest
+          type: emscripten
+        - os: macos-latest
+          type: emscripten
+
+    name: Build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Setup Emscripten
+      uses: lovasoa/setup-emscripten@master
+      with:
+        emscripten-version: '1.38.47'
+      if: matrix.type == 'emscripten'
+    - name: Setup MSBuild
+      uses: warrenbuckley/Setup-MSBuild@v1
+      if: matrix.os == 'windows-latest'
+    - name: Execute
+      id: build
+      uses: nicozink/github-build-actions@master
+      with:
+        os: ${{ matrix.os }}
+        type: ${{ matrix.type }}

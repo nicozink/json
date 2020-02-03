@@ -4,7 +4,9 @@ PROJECT(json_tests VERSION 1.0.0)
 
 enable_testing()
 
-find_package(Boost REQUIRED COMPONENTS system)
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/build_tools/cmake/cmake_utils.cmake)
+	include(build_tools/cmake/cmake_utils.cmake)
+endif()
 
 set(SRC_MAIN
 	${CMAKE_CURRENT_SOURCE_DIR}/include/json/json.h
@@ -37,11 +39,9 @@ target_include_directories(json
 	PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-target_link_libraries(json PRIVATE Boost::system)
-
 target_compile_features(json PRIVATE cxx_std_17)
 
-if (EXISTS libraries/unittest/CMakeLists.txt)
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/libraries/unittest/CMakeLists.txt)
 	add_subdirectory(libraries/unittest)
 endif()
 
@@ -53,30 +53,8 @@ create_executable(json_test test ${SRC_TEST})
 
 target_link_libraries(json_test json unittest)
 
-add_test(NAME json_test
-	COMMAND json_test)
-
-set(config_install_dir "lib/cmake/${PROJECT_NAME}")
-set(include_install_dir "include")
-
-set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
-set(version_config "${generated_dir}/${PROJECT_NAME}ConfigVersion.cmake")
-set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
-set(targets_export_name "${PROJECT_NAME}Targets")
-
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${version_config}" COMPATIBILITY SameMajorVersion)
-configure_package_config_file("cmake/Config.cmake.in" "${project_config}" INSTALL_DESTINATION "${config_install_dir}")
-
-install(TARGETS json EXPORT jsonTargets
-	LIBRARY DESTINATION lib
-	ARCHIVE DESTINATION lib
-	INCLUDES DESTINATION include)
-install(DIRECTORY include/json DESTINATION include)
-install(EXPORT jsonTargets
-	FILE jsonTargets.cmake
-	DESTINATION lib/cmake/json)
-install(
-	FILES "${project_config}" "${version_config}"
-	DESTINATION "${config_install_dir}"
-)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+	add_test(NAME json_test COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/json_test.js")
+else ()
+	add_test(NAME json_test COMMAND json_test)
+endif ()

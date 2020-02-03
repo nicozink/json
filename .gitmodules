@@ -1,0 +1,6 @@
+[submodule "build_tools"]
+	path = build_tools
+	url = https://github.com/nicozink/build_tools.git
+[submodule "libraries/unittest"]
+	path = libraries/unittest
+	url = https://github.com/nicozink/unittest.git
