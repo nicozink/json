@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/build_tools/cmake/cmake_utils.cmake)
+	include(${CMAKE_CURRENT_SOURCE_DIR}/build_tools/cmake/cmake_utils.cmake)
+endif()
+
 PROJECT(json_tests VERSION 1.0.0)
 
 enable_testing()
-
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/build_tools/cmake/cmake_utils.cmake)
-	include(build_tools/cmake/cmake_utils.cmake)
-endif()
 
 set(SRC_MAIN
 	${CMAKE_CURRENT_SOURCE_DIR}/include/json/json.h
@@ -54,7 +54,7 @@ create_executable(json_test test ${SRC_TEST})
 target_link_libraries(json_test json unittest)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-	add_test(NAME json_test COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/json_test.js")
+	add_test(NAME json_test COMMAND ${NODE_JS} "${CMAKE_CURRENT_BINARY_DIR}/json_test.js")
 else ()
 	add_test(NAME json_test COMMAND json_test)
 endif ()
