@@ -10,7 +10,7 @@ jobs:
         os: [windows-latest, ubuntu-latest, macos-latest]
         type: [native, emscripten]
         exclude:
-        - os: windows-latest
+        - os: ubuntu-latest
           type: emscripten
         - os: macos-latest
           type: emscripten
@@ -19,11 +19,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Setup Emscripten
-      uses: lovasoa/setup-emscripten@master
+    - name: Setup Python
+      uses: actions/setup-python@v2
       with:
-        emscripten-version: '1.38.47'
-      if: matrix.type == 'emscripten'
+        python-version: '3.x'
     - name: Setup MSBuild
       uses: warrenbuckley/Setup-MSBuild@v1
       if: matrix.os == 'windows-latest'
