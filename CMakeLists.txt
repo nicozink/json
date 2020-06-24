@@ -39,7 +39,7 @@ target_include_directories(json
 
 target_compile_features(json PRIVATE cxx_std_17)
 
-add_subdirectory(${LIBRARY_FOLDER}/unittest unittest)
+import_library(unittest)
 
 create_library(json_tests tests ${SRC_TEST})
 
